@@ -5,4 +5,5 @@ mod days;
 use days::*;
 
 fn main() {
+	day_2::second();
 }
