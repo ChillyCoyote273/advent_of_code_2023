@@ -8,7 +8,7 @@ pub fn first() {
     let colors = ["red", "green", "blue"];
     let maximums = [12, 13, 14];
     let result: usize = read_file()
-        .split_terminator("\n")
+        .split_terminator('\n')
         .map(|game| {
             game.chars()
                 .skip_while(|&c| c != ':')
@@ -18,11 +18,11 @@ pub fn first() {
                 .map(|hand| {
                     hand.split(", ")
                         .map(|color| {
-                            let color_data: Vec<_> = color.split(" ").collect();
+                            let color_data: Vec<_> = color.split(' ').collect();
                             let mut color_array = [0; 3];
                             color_array[colors.iter().position(|&c| c == color_data[1]).unwrap()] =
                                 color_data[0].parse::<i32>().unwrap();
-                            color_array.clone()
+                            color_array
                         })
                         .fold(vec![0; 3], |acc, x| {
                             acc.iter().zip(x.iter()).map(|(&a, &b)| a + b).collect()
@@ -47,7 +47,7 @@ pub fn first() {
 pub fn second() {
     let colors = ["red", "green", "blue"];
     let result: i32 = read_file()
-        .split_terminator("\n")
+        .split_terminator('\n')
         .map(|game| {
             game.chars()
                 .skip_while(|&c| c != ':')
@@ -57,11 +57,11 @@ pub fn second() {
                 .map(|hand| {
                     hand.split(", ")
                         .map(|color| {
-                            let color_data: Vec<_> = color.split(" ").collect();
+                            let color_data: Vec<_> = color.split(' ').collect();
                             let mut color_array = [0; 3];
                             color_array[colors.iter().position(|&c| c == color_data[1]).unwrap()] =
                                 color_data[0].parse::<i32>().unwrap();
-                            color_array.clone()
+                            color_array
                         })
                         .fold(vec![0; 3], |acc, x| {
                             acc.iter().zip(x.iter()).map(|(&a, &b)| a + b).collect()

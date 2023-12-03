@@ -6,7 +6,7 @@ fn read_file() -> String {
 
 pub fn first() {
     let sum: u32 = read_file()
-        .split_terminator("\n")
+        .split_terminator('\n')
         .map(|line| {
             let vec: Vec<_> = line.chars().filter_map(|c| c.to_digit(10)).collect();
             vec.first().unwrap() * 10 + vec.last().unwrap()
@@ -49,6 +49,6 @@ fn get_number(line: &str) -> usize {
 }
 
 pub fn second() {
-    let sum: usize = read_file().split_terminator("\n").map(get_number).sum();
+    let sum: usize = read_file().split_terminator('\n').map(get_number).sum();
     println!("{}", sum);
 }

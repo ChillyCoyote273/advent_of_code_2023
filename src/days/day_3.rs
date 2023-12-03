@@ -12,7 +12,7 @@ pub fn first() {
     let mut mask = vec![vec![false; grid[0].len()]; grid.len()];
     for i in 0..grid.len() {
         for j in 0..grid[i].len() {
-            if grid[i][j] == '.' || grid[i][j].is_digit(10) {
+            if grid[i][j] == '.' || grid[i][j].is_ascii_digit() {
                 continue;
             }
 
@@ -32,25 +32,25 @@ pub fn first() {
     let mut count = 0;
     for i in 0..mask.len() {
         for j in 0..mask[i].len() {
-            if mask[i][j] && grid[i][j].is_digit(10) {
+            if mask[i][j] && grid[i][j].is_ascii_digit() {
                 let mut start = j as i32;
                 while (0..mask[i].len() as i32).contains(&start)
-                    && grid[i][start as usize].is_digit(10)
+                    && grid[i][start as usize].is_ascii_digit()
                 {
                     start -= 1;
                 }
                 start += 1;
                 let mut end = j;
-                while (0..mask[i].len()).contains(&end) && grid[i][end as usize].is_digit(10) {
+                while (0..mask[i].len()).contains(&end) && grid[i][end].is_ascii_digit() {
                     end += 1;
                 }
-                let result: u32 = grid[i][start as usize..end as usize]
+                let result: u32 = grid[i][start as usize..end]
                     .iter()
                     .collect::<String>()
                     .parse()
                     .unwrap();
                 count += result;
-                for k in start as usize..end as usize {
+                for k in start as usize..end {
                     mask[i][k] = false;
                 }
             }
@@ -60,14 +60,14 @@ pub fn first() {
     println!("{}", count);
 }
 
-fn search(grid: &Vec<Vec<char>>, i: usize, j: i32) -> u32 {
+fn search(grid: &[Vec<char>], i: usize, j: i32) -> u32 {
     let mut start = j;
-    while (0..grid[i].len() as i32).contains(&start) && grid[i][start as usize].is_digit(10) {
+    while (0..grid[i].len() as i32).contains(&start) && grid[i][start as usize].is_ascii_digit() {
         start -= 1;
     }
     start += 1;
     let mut end = j;
-    while (0..grid[i].len() as i32).contains(&end) && grid[i][end as usize].is_digit(10) {
+    while (0..grid[i].len() as i32).contains(&end) && grid[i][end as usize].is_ascii_digit() {
         end += 1;
     }
     grid[i][start as usize..end as usize]
@@ -91,18 +91,18 @@ pub fn second() {
                 let mut gear = 1;
                 for k in [-1, 1] {
                     if (0..grid.len() as i32).contains(&(i + k)) {
-                        if grid[(i + k) as usize][j as usize].is_digit(10) {
+                        if grid[(i + k) as usize][j as usize].is_ascii_digit() {
                             adjacent += 1;
                             gear *= search(&grid, (i + k) as usize, j);
                         } else {
                             if (0..grid[(i + k) as usize].len() as i32).contains(&(j - 1))
-                                && grid[(i + k) as usize][(j - 1) as usize].is_digit(10)
+                                && grid[(i + k) as usize][(j - 1) as usize].is_ascii_digit()
                             {
                                 adjacent += 1;
                                 gear *= search(&grid, (i + k) as usize, j - 1);
                             }
                             if (0..grid[(i + k) as usize].len() as i32).contains(&(j + 1))
-                                && grid[(i + k) as usize][(j + 1) as usize].is_digit(10)
+                                && grid[(i + k) as usize][(j + 1) as usize].is_ascii_digit()
                             {
                                 adjacent += 1;
                                 gear *= search(&grid, (i + k) as usize, j + 1);
@@ -111,13 +111,13 @@ pub fn second() {
                     }
                 }
                 if (0..grid[i as usize].len() as i32).contains(&(j - 1))
-                    && grid[i as usize][(j - 1) as usize].is_digit(10)
+                    && grid[i as usize][(j - 1) as usize].is_ascii_digit()
                 {
                     adjacent += 1;
                     gear *= search(&grid, i as usize, j - 1);
                 }
                 if (0..grid[i as usize].len() as i32).contains(&(j + 1))
-                    && grid[i as usize][(j + 1) as usize].is_digit(10)
+                    && grid[i as usize][(j + 1) as usize].is_ascii_digit()
                 {
                     adjacent += 1;
                     gear *= search(&grid, i as usize, j + 1);
