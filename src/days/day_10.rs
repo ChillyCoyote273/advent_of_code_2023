@@ -1,13 +1,9 @@
 use std::fs;
 
 fn read_file() -> String {
-	fs::read_to_string("src/inputs/day_10.txt").expect("Error reading the file")
+    fs::read_to_string("src/inputs/day_10.txt").expect("Error reading the file")
 }
 
-pub fn first() {
+pub fn first() {}
 
-}
-
-pub fn second() {
-
-}
+pub fn second() {}
