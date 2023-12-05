@@ -53,3 +53,40 @@ pub fn second() {
     let sum: usize = read_file().split_terminator('\n').map(get_number).sum();
     println!("{}", sum);
 }
+
+pub fn regex() {
+    let re = Regex::new(r"(?m)^.*?(\d|one|two|three|four|five|six|seven|eight|nine)(?:.*(\d|one|two|three|four|five|six|seven|eight|nine))?.*?$").unwrap();
+    let result: u32 = re
+        .captures_iter(&read_file())
+        .map(|x| {
+            let first = match x.get(1).unwrap().as_str() {
+                "1" | "one" => 1,
+                "2" | "two" => 2,
+                "3" | "three" => 3,
+                "4" | "four" => 4,
+                "5" | "five" => 5,
+                "6" | "six" => 6,
+                "7" | "seven" => 7,
+                "8" | "eight" => 8,
+                "9" | "nine" => 9,
+                _ => 0,
+            };
+            let second = match x.get(2).map(|x| x.as_str()).unwrap_or("") {
+                "1" | "one" => 1,
+                "2" | "two" => 2,
+                "3" | "three" => 3,
+                "4" | "four" => 4,
+                "5" | "five" => 5,
+                "6" | "six" => 6,
+                "7" | "seven" => 7,
+                "8" | "eight" => 8,
+                "9" | "nine" => 9,
+                "" => first,
+                _ => 0,
+            };
+            first * 10 + second
+        })
+        .sum();
+    println!("Regex: {}", result);
+    second();
+}
