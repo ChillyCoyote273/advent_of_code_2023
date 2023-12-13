@@ -68,23 +68,23 @@ pub fn second() {
     let mut steps = 0;
     let mut current = map
         .iter()
-        .filter_map(|(k, v)| {
-            if k.chars().last().unwrap() == 'A' {
+        .filter_map(|(k, _v)| {
+            if k.ends_with('A') {
                 Some(k.clone())
             } else {
                 None
             }
         })
         .collect::<Vec<String>>();
-    while !current.iter().all(|s| s.chars().last().unwrap() == 'Z') {
+    while !current.iter().all(|s| s.ends_with('Z')) {
         let instruction = instructions[steps % instructions.len()];
-        for i in 0..current.len() {
+        for c in current.iter_mut() {
             let next = if instruction == 0 {
-                map.get(&current[i]).unwrap().0.clone()
+                map.get(c).unwrap().0.clone()
             } else {
-                map.get(&current[i]).unwrap().1.clone()
+                map.get(c).unwrap().1.clone()
             };
-            current[i] = next;
+            *c = next;
         }
         steps += 1;
     }
@@ -116,22 +116,21 @@ pub fn second_other() {
 
     println!("len: {}", instructions.len());
 
-    let mut steps = 0;
-    let mut current = map
+    let current = map
         .iter()
-        .filter_map(|(k, v)| {
-            if k.chars().last().unwrap() == 'A' {
+        .filter_map(|(k, _v)| {
+            if k.ends_with('A') {
                 Some(k.clone())
             } else {
                 None
             }
         })
         .collect::<Vec<String>>();
-    for k in 0..current.len() {
+    let mut steps;
+    for mut test in current {
         steps = 0;
         let mut seen = None;
-        let mut test = current[k].clone();
-        'w: while true {
+        'w: loop {
             let instruction = instructions[steps % instructions.len()];
             let next = if instruction == 0 {
                 map.get(&test).unwrap().0.clone()
@@ -140,7 +139,7 @@ pub fn second_other() {
             };
             test = next;
             steps += 1;
-            if test.chars().last().unwrap() == 'Z' {
+            if test.ends_with('Z') {
                 match seen {
                     Some(s) => {
                         println!("First: {}, Second: {}, Cycle: {}", s, steps, steps - s);
@@ -179,9 +178,9 @@ pub fn answer() {
     let mut lengths = lengths.clone();
     while lengths.iter().any(|l| *l != 1) {
         let mut found = false;
-        for i in 0..lengths.len() {
-            if lengths[i] % div == 0 {
-                lengths[i] /= div;
+        for length in lengths.iter_mut() {
+            if *length % div == 0 {
+                *length /= div;
                 found = true;
             }
         }

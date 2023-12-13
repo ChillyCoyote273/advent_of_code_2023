@@ -54,7 +54,7 @@ pub fn first() {
 }
 
 pub fn second() {
-    let mut universe = read_file()
+    let universe = read_file()
         .split_terminator('\n')
         .map(|line| line.chars().collect::<Vec<char>>())
         .collect::<Vec<Vec<char>>>();
