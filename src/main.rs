@@ -5,5 +5,5 @@ mod days;
 use days::*;
 
 fn main() {
-    day_22::first();
+    day_23::first();
 }
