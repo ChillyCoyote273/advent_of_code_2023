@@ -153,15 +153,6 @@ pub fn first() {
 
     map[-min_r as usize][-min_c as usize] = 'X';
 
-    println!("{}, {}", -min_r, -min_c);
-
-    println!(
-        "{}",
-        map.iter()
-            .map(|line| line.iter().take(300).collect::<String>())
-            .join("\n")
-    );
-
     println!("{}", map.iter().flatten().filter(|&&c| c != '.').count());
 }
 

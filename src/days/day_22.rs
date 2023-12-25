@@ -2,7 +2,6 @@ use itertools::Itertools;
 use std::collections::HashSet;
 use std::fs;
 use std::str::FromStr;
-use std::vec::IntoIter;
 
 fn read_file() -> String {
     fs::read_to_string("src/inputs/day_22.txt").expect("Error reading the file")
@@ -200,7 +199,7 @@ pub fn first() {
         .filter(|(i, _)| supporting[*i].iter().all(|j| supported_by[*j].len() >= 2))
         .count();
 
-    println!("First: {}", count);
+    println!("{}", count);
 }
 
 pub fn second() {
@@ -313,5 +312,5 @@ pub fn second() {
         })
         .sum::<u64>();
 
-    println!("Second: {}", count);
+    println!("{}", count);
 }

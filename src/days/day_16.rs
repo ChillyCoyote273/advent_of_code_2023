@@ -137,7 +137,7 @@ pub fn first() {
         .map(|row| row.iter().filter(|&&x| x).count())
         .sum::<usize>();
 
-    println!("The number of tiles the beam can reach is {}", count);
+    println!("{}", count);
 }
 
 pub fn second() {
@@ -297,8 +297,5 @@ pub fn second() {
         .max()
         .unwrap();
 
-    println!(
-        "The maximum number of tiles the beam can reach is {}",
-        max_count
-    );
+    println!("{}", max_count);
 }

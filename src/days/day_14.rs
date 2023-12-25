@@ -1,5 +1,5 @@
 use itertools::Itertools;
-use std::collections::{BTreeMap, HashMap};
+use std::collections::HashMap;
 use std::fs;
 
 fn read_file() -> String {

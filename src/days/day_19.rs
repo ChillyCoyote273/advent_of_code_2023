@@ -1,5 +1,5 @@
 use itertools::Itertools;
-use std::collections::{HashMap, HashSet};
+use std::collections::HashMap;
 use std::fs;
 use std::ops::{Range, RangeInclusive};
 
@@ -88,50 +88,7 @@ pub fn first() {
         }
     }
 
-    println!("The sum of the part values is {}", acc);
-}
-
-fn union(
-    a: Vec<RangeInclusive<usize>>,
-    b: Vec<RangeInclusive<usize>>,
-) -> Vec<RangeInclusive<usize>> {
-    let points = a
-        .iter()
-        .flat_map(|range| [*range.start(), *range.end()])
-        .chain(b.iter().flat_map(|range| [*range.start(), *range.end()]))
-        .sorted_unstable()
-        .dedup()
-        .collect::<Vec<_>>();
-
-    let mut result = Vec::new();
-
-    'outer: for (&first, &last) in points.iter().zip(points.iter().skip(1)) {
-        let mid = (first + last) / 2;
-        for range in a.iter() {
-            if range.contains(&mid) {
-                result.push(first..=last);
-                continue 'outer;
-            }
-        }
-        for range in b.iter() {
-            if range.contains(&mid) {
-                result.push(first..=last);
-                continue 'outer;
-            }
-        }
-    }
-
-    let mut i = 0;
-    while i < result.len() - 1 {
-        if result[i].end() == result[i + 1].start() {
-            result[i] = (*result[i].start())..=(*result[i + 1].end());
-            result.remove(i + 1);
-        } else {
-            i += 1;
-        }
-    }
-
-    result
+    println!("{}", acc);
 }
 
 fn subtract(
@@ -252,5 +209,5 @@ pub fn second() {
 
     let initial_ranges = vec![vec![1..=4000]; 4];
     let possibility_count = get_ranges(&rules, &initial_ranges, "in");
-    println!("The number of possibilities is {}", possibility_count)
+    println!("{}", possibility_count)
 }

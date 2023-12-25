@@ -1,4 +1,3 @@
-use itertools::Itertools;
 use std::fs;
 
 fn read_file() -> String {

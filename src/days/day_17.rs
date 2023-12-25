@@ -343,7 +343,7 @@ pub fn first() {
 
     let result = dijkstra(grid, (0, 0, 0), (140, 140));
 
-    println!("Result: {}", result);
+    println!("{}", result);
 }
 
 pub fn second() {
@@ -358,5 +358,5 @@ pub fn second() {
 
     let result = dijkstra_ultra(grid, (0, 0, 0), (140, 140));
 
-    println!("Result: {}", result);
+    println!("{}", result);
 }

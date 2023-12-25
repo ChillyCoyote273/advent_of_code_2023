@@ -1,4 +1,3 @@
-use regex::Regex;
 use std::fs;
 
 fn read_file() -> String {

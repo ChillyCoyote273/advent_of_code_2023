@@ -1,61 +1,11 @@
 use itertools::Itertools;
 use rayon::prelude::*;
-use std::collections::hash_map::Entry::{Occupied, Vacant};
 use std::collections::HashMap;
 use std::fs;
 
 fn read_file() -> String {
     fs::read_to_string("src/inputs/day_12.txt").expect("Error reading the file")
 }
-
-// fn get_encoding(row: Vec<bool>) -> Vec<u64> {
-//     let mut encoding: Vec<u64> = Vec::new();
-//     let mut current = None;
-//     for (i, &elem) in row.iter().enumerate() {
-//         if elem {
-//             match current {
-//                 Some(_) => (),
-//                 None => current = Some(i),
-//             };
-//         } else if let Some(start) = current {
-//             encoding.push((i - start) as u64);
-//             current = None;
-//         }
-//     }
-//     if let Some(start) = current {
-//         encoding.push((row.len() - start) as u64);
-//     }
-//
-//     encoding
-// }
-
-// fn count_possible_arrangements(
-//     map: Vec<Option<bool>>,
-//     encoding: Vec<u64>,
-//     empty_spaces: usize,
-// ) -> u64 {
-//     let mut count = 0;
-//     for i in 0..(1 << empty_spaces) {
-//         let mut bitmap = i;
-//         let new_map: Vec<bool> = map
-//             .iter()
-//             .map(|&c| match c {
-//                 Some(b) => b,
-//                 None => {
-//                     let bit = (bitmap & 1) == 1;
-//                     bitmap >>= 1;
-//                     bit
-//                 }
-//             })
-//             .collect();
-//
-//         if get_encoding(new_map) == encoding {
-//             count += 1;
-//         }
-//     }
-//
-//     count
-// }
 
 #[derive(Clone, Hash, PartialEq, Eq, Debug, Default)]
 struct Key {
@@ -184,29 +134,6 @@ fn count_possible_arrangements_recursive(
 }
 
 pub fn first() {
-    // let sum: u64 = read_file()
-    //     .split_terminator('\n')
-    //     .map(|line| {
-    //         let line_parts = line.split_ascii_whitespace().collect::<Vec<&str>>();
-    //         let map = line_parts[0]
-    //             .chars()
-    //             .map(|c| match c {
-    //                 '#' => Some(true),
-    //                 '.' => Some(false),
-    //                 _ => None,
-    //             })
-    //             .collect::<Vec<Option<bool>>>();
-    //         let encoding = line_parts[1]
-    //             .split(',')
-    //             .map(|s| s.parse::<u64>().unwrap())
-    //             .collect::<Vec<u64>>();
-    //         let empty_spaces = map.iter().filter(|c| c.is_none()).count();
-    //         count_possible_arrangements(map, encoding, empty_spaces)
-    //     })
-    //     .sum();
-    //
-    // println!("The sum is {}", sum);
-
     let sum: u64 = read_file()
         .split_terminator('\n')
         .map(|line| {
@@ -245,7 +172,7 @@ pub fn first() {
         })
         .sum();
 
-    println!("The sum is {}", sum);
+    println!("{}", sum);
 }
 
 pub fn second() {
@@ -296,5 +223,5 @@ pub fn second() {
         })
         .sum();
 
-    println!("The sum is {}", sum);
+    println!("{}", sum);
 }

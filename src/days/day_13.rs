@@ -96,7 +96,7 @@ pub fn first() {
         })
         .sum();
 
-    println!("The answer is {}", answer);
+    println!("{}", answer);
 }
 
 pub fn second() {
@@ -118,5 +118,5 @@ pub fn second() {
         })
         .sum();
 
-    println!("The answer is {}", answer);
+    println!("{}", answer);
 }

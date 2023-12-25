@@ -41,13 +41,13 @@ pub fn first() {
         })
         .sum();
 
-    println!("Day 15 first: {}", sum);
+    println!("{}", sum);
 }
 
 pub fn second() {
     let steps = read_file()
         .split_terminator(',')
-        .map(|x| Step::new(x))
+        .map(Step::new)
         .collect_vec();
 
     let mut boxes: Vec<Vec<(String, u64)>> = vec![Vec::new(); 256];
@@ -82,5 +82,5 @@ pub fn second() {
         })
         .sum::<usize>();
 
-    println!("Day 15 second: {}", sum);
+    println!("{}", sum);
 }

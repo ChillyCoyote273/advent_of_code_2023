@@ -205,7 +205,7 @@ pub fn first() {
         }
     }
 
-    println!("Result: {}", high_pulses * low_pulses);
+    println!("{}", high_pulses * low_pulses);
 }
 
 pub fn second() {
@@ -223,5 +223,5 @@ pub fn second() {
         .iter()
         .fold(1, |acc, &period| acc * period / gcd(acc, period));
 
-    println!("Result: {}", lcm);
+    println!("{}", lcm);
 }

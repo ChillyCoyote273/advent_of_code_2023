@@ -83,7 +83,7 @@ pub fn first() {
         count += 1;
     }
 
-    println!("Count: {}", count / 2);
+    println!("{}", count / 2);
 }
 
 pub fn second() {
@@ -105,7 +105,7 @@ pub fn second() {
         .unwrap();
 
     let mut direction = Down;
-    let initial = position.clone();
+    let initial = position;
 
     let mut loop_mask = vec![vec![false; map[0].len()]; map.len()];
 
@@ -196,5 +196,5 @@ pub fn second() {
         }
     }
 
-    println!("Count: {}", count);
+    println!("{}", count);
 }

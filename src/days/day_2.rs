@@ -41,7 +41,7 @@ pub fn first() {
             }
         })
         .sum();
-    println!("{:?}", result);
+    println!("{}", result);
 }
 
 pub fn second() {
@@ -74,5 +74,5 @@ pub fn second() {
                 .product::<i32>()
         })
         .sum();
-    println!("{:?}", result);
+    println!("{}", result);
 }
